@@ -59,11 +59,22 @@ class Client {
           json: async () => JSON.parse(xhr.responseText),
           text: async () => xhr.responseText,
           clone: () => response,
-          headers: new Headers(xhr.getAllResponseHeaders().split('\r\n').reduce((acc: { [x: string]: any; }, current: { split: (arg0: string) => [any, any]; }) => {
-            const [key, value] = current.split(': ');
-            if (key) acc[key] = value;
-            return acc;
-          }, {} as Record<string, string>)),
+          headers: new Headers(
+            xhr
+              .getAllResponseHeaders()
+              .split("\r\n")
+              .reduce(
+                (
+                  acc: { [x: string]: any },
+                  current: { split: (arg0: string) => [any, any] },
+                ) => {
+                  const [key, value] = current.split(": ");
+                  if (key) acc[key] = value;
+                  return acc;
+                },
+                {} as Record<string, string>,
+              ),
+          ),
           redirected: false,
           statusText: xhr.statusText,
           type: "basic",
