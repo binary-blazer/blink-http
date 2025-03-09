@@ -1,12 +1,13 @@
 // @ts-expect-error: xhr2 has no types
 import { XMLHttpRequest } from "xhr2";
+
 import { Interceptor, ResponseInterceptor, BlinkResponse } from "../interfaces";
 import {
   BLINK_USER_AGENT,
   DEFAULT_TIMEOUT,
   DEFAULT_OPTIONS,
-  DEFAULT_HEADERS,
 } from "../constants.js";
+import { buildFinalUrl, applyInterceptors, createResponse } from "./utils.js";
 
 class Client {
   baseURL: string;
@@ -48,22 +49,10 @@ class Client {
     queryParams: Record<string, string> = {},
     onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
-    let finalUrl = this.baseURL ? new URL(url, this.baseURL).toString() : url;
+    let finalUrl = buildFinalUrl(this.baseURL, url, queryParams);
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
 
-    const urlObj = new URL(finalUrl);
-    Object.keys(queryParams).forEach((key) =>
-      urlObj.searchParams.append(key, queryParams[key]),
-    );
-    finalUrl = urlObj.toString();
-
-    for (const interceptor of this.interceptors.request) {
-      const modified = interceptor(finalUrl, finalOptions);
-      if (modified) {
-        finalUrl = modified.url || finalUrl;
-        finalOptions = modified.options || finalOptions;
-      }
-    }
+    applyInterceptors(this.interceptors.request, finalUrl, finalOptions);
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -83,40 +72,11 @@ class Client {
       }
 
       xhr.onload = async () => {
-        let response: BlinkResponse = {
-          status: xhr.status,
-          ok: xhr.status >= 200 && xhr.status < 300,
-          json: async () => JSON.parse(xhr.responseText),
-          text: async () => xhr.responseText,
-          clone: () => response,
-          headers: new Headers(
-            xhr
-              .getAllResponseHeaders()
-              .split("\r\n")
-              .reduce(
-                (
-                  acc: { [x: string]: any },
-                  current: { split: (arg0: string) => [any, any] },
-                ) => {
-                  const [key, value] = current.split(": ");
-                  if (key) acc[key] = value;
-                  return acc;
-                },
-                {} as Record<string, string>,
-              ),
-          ),
-          redirected: false,
-          statusText: xhr.statusText,
-          type: "basic",
-          url: finalUrl,
-          body: null,
-          bodyUsed: false,
-          arrayBuffer: async () => new ArrayBuffer(0),
-          blob: async () => new Blob(),
-          formData: async () => new FormData(),
-          bytes: async () => new Uint8Array(),
-          userAgent: this.userAgent,
-        };
+        let response: BlinkResponse = createResponse(
+          xhr,
+          finalUrl,
+          this.userAgent,
+        );
 
         for (const interceptor of this.interceptors.response) {
           const modifiedResponse = await interceptor(response);
@@ -161,7 +121,7 @@ class Client {
         ...options,
         method: "POST",
         body: JSON.stringify(body),
-        headers: { ...DEFAULT_HEADERS, ...options.headers },
+        headers: { "Content-Type": "application/json", ...options.headers },
       },
       queryParams,
       onProgress,
@@ -181,7 +141,7 @@ class Client {
         ...options,
         method: "PUT",
         body: JSON.stringify(body),
-        headers: { ...DEFAULT_HEADERS, ...options.headers },
+        headers: { "Content-Type": "application/json", ...options.headers },
       },
       queryParams,
       onProgress,
@@ -215,7 +175,7 @@ class Client {
         ...options,
         method: "PATCH",
         body: JSON.stringify(body),
-        headers: { ...DEFAULT_HEADERS, ...options.headers },
+        headers: { "Content-Type": "application/json", ...options.headers },
       },
       queryParams,
       onProgress,
