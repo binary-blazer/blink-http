@@ -1,6 +1,9 @@
 # Blink HTTP
 
-A tiny and standalone HTTP/HTTPS client based on the FETCH API.
+A tiny and standalone HTTP client based on XMLHttpRequest.
+
+[![npm](https://img.shields.io/npm/v/blink-http)](https://www.npmjs.com/package/blink-http)
+[![npm](https://img.shields.io/npm/dt/blink-http)](https://www.npmjs.com/package/blink-http)
 
 ## Installation
 
@@ -10,6 +13,10 @@ You can install the package using npm or pnpm:
 npm install blink-http
 # or
 pnpm add blink-http
+# or
+yarn add blink-http
+# or
+bun install blink-http
 ```
 
 ## Usage

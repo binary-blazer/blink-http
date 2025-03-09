@@ -1,7 +1,7 @@
 {
   "name": "blink-http",
   "version": "1.0.0",
-  "description": "A tiny and standalone http/https client based on the FETCH API",
+  "description": "A tiny and standalone HTTP client based on XMLHttpRequest",
   "exports": {
     ".": {
       "import": "./distribution/index.js",
