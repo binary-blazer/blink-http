@@ -1,0 +1,58 @@
+{
+  "name": "blink-http",
+  "version": "1.0.0",
+  "description": "A tiny and standalone http/https client based on the FETCH API",
+  "exports": {
+    ".": {
+      "import": "./distribution/index.js",
+      "require": "./distribution/index.js"
+    }
+  },
+  "types": "./distribution/index.d.ts",
+  "files": [
+    "distribution",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prepublishOnly": "pnpm build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "http",
+    "https",
+    "fetch",
+    "client",
+    "tiny",
+    "standalone",
+    "blink",
+    "blink-http"
+  ],
+  "author": {
+    "name": "Jonas F. Franke <@binary-blazer>",
+    "email": "me@binaryblazer.me",
+    "url": "https://binaryblazer.me"
+  },
+  "license": "BSD-3-Clause",
+  "homepage": "https://github.com/binary-blazer/blink-http#readme",
+  "bugs": {
+    "url": "https://github.com/binary-blazer/blink-http/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binary-blazer/blink-http.git"
+  },
+  "packageManager": "pnpm@10.6.1",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "xhr2": "^0.2.1"
+  }
+}
