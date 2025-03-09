@@ -1,10 +1,20 @@
 import Client from "./core/client.js";
 import { BlinkClientOptions } from "./interfaces";
+import {
+  BLINK_USER_AGENT,
+  DEFAULT_TIMEOUT,
+  DEFAULT_QUERY_PARAMS,
+  DEFAULT_OPTIONS,
+} from "./constants.js";
 
 class BlinkClient extends Client {
   constructor(options: BlinkClientOptions = {}) {
-    const { baseURL = "", timeout = 0 } = options;
-    super(baseURL, {}, timeout);
+    const {
+      baseURL = "",
+      timeout = DEFAULT_TIMEOUT,
+      userAgent = BLINK_USER_AGENT,
+    } = options;
+    super(baseURL, {}, timeout, userAgent);
   }
 
   /**
@@ -35,8 +45,8 @@ class BlinkClient extends Client {
    */
   public get(
     url: string,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.get(url, options, queryParams, onProgress);
@@ -70,8 +80,8 @@ class BlinkClient extends Client {
    */
   public delete(
     url: string,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.delete(url, options, queryParams, onProgress);
@@ -106,8 +116,8 @@ class BlinkClient extends Client {
   public post(
     url: string,
     body: any,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.post(url, body, options, queryParams, onProgress);
@@ -142,8 +152,8 @@ class BlinkClient extends Client {
   public put(
     url: string,
     body: any,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.put(url, body, options, queryParams, onProgress);
@@ -178,8 +188,8 @@ class BlinkClient extends Client {
   public patch(
     url: string,
     body: any,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.patch(url, body, options, queryParams, onProgress);
@@ -207,8 +217,8 @@ class BlinkClient extends Client {
    */
   public head(
     url: string,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.head(url, options, queryParams, onProgress);
@@ -236,8 +246,8 @@ class BlinkClient extends Client {
    */
   public options(
     url: string,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.options(url, options, queryParams, onProgress);
@@ -265,8 +275,8 @@ class BlinkClient extends Client {
    */
   public trace(
     url: string,
-    options: RequestInit = {},
-    queryParams: Record<string, string> = {},
+    options: RequestInit = DEFAULT_OPTIONS,
+    queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
     return super.trace(url, options, queryParams, onProgress);

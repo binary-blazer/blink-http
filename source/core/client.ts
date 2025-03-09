@@ -1,6 +1,12 @@
 // @ts-expect-error: xhr2 has no types
 import { XMLHttpRequest } from "xhr2";
 import { Interceptor, ResponseInterceptor, BlinkResponse } from "../interfaces";
+import {
+  BLINK_USER_AGENT,
+  DEFAULT_TIMEOUT,
+  DEFAULT_OPTIONS,
+  DEFAULT_HEADERS,
+} from "../constants.js";
 
 class Client {
   baseURL: string;
@@ -10,8 +16,14 @@ class Client {
     response: ResponseInterceptor[];
   };
   timeout: number;
+  userAgent: string;
 
-  constructor(baseURL = "", options: RequestInit = {}, timeout = 0) {
+  constructor(
+    baseURL = "",
+    options: RequestInit = DEFAULT_OPTIONS,
+    timeout = DEFAULT_TIMEOUT,
+    userAgent = BLINK_USER_AGENT,
+  ) {
     this.baseURL = baseURL;
     this.defaultOptions = options;
     this.interceptors = {
@@ -19,6 +31,7 @@ class Client {
       response: [],
     };
     this.timeout = timeout;
+    this.userAgent = userAgent;
   }
 
   protected useRequestInterceptor(interceptor: Interceptor): void {
@@ -38,7 +51,6 @@ class Client {
     let finalUrl = this.baseURL ? new URL(url, this.baseURL).toString() : url;
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
 
-    // Append query parameters to the URL
     const urlObj = new URL(finalUrl);
     Object.keys(queryParams).forEach((key) =>
       urlObj.searchParams.append(key, queryParams[key]),
@@ -63,6 +75,8 @@ class Client {
           xhr.setRequestHeader(key, value as string);
         }
       }
+
+      xhr.setRequestHeader("User-Agent", this.userAgent);
 
       if (onProgress) {
         xhr.onprogress = onProgress;
@@ -101,6 +115,7 @@ class Client {
           blob: async () => new Blob(),
           formData: async () => new FormData(),
           bytes: async () => new Uint8Array(),
+          userAgent: this.userAgent,
         };
 
         for (const interceptor of this.interceptors.response) {
@@ -146,7 +161,7 @@ class Client {
         ...options,
         method: "POST",
         body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json", ...options.headers },
+        headers: { ...DEFAULT_HEADERS, ...options.headers },
       },
       queryParams,
       onProgress,
@@ -166,7 +181,7 @@ class Client {
         ...options,
         method: "PUT",
         body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json", ...options.headers },
+        headers: { ...DEFAULT_HEADERS, ...options.headers },
       },
       queryParams,
       onProgress,
@@ -200,7 +215,7 @@ class Client {
         ...options,
         method: "PATCH",
         body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json", ...options.headers },
+        headers: { ...DEFAULT_HEADERS, ...options.headers },
       },
       queryParams,
       onProgress,

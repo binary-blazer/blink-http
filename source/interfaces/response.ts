@@ -15,4 +15,5 @@ export interface BlinkResponse extends Response {
   blob: () => Promise<Blob>;
   formData: () => Promise<FormData>;
   bytes: () => Promise<Uint8Array>;
+  userAgent: string;
 }

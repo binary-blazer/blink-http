@@ -30,7 +30,8 @@ import { BlinkClient } from 'blink-http';
 
 const blink = new BlinkClient({
     baseURL: 'https://jsonplaceholder.typicode.com', // is optional
-    timeout: 10000 // is optional
+    timeout: 10000, // is optional
+    userAgent: 'custom-user-agent' // is optional
 });
 
 const response = await blink.get('/posts/1');
@@ -42,7 +43,8 @@ console.log(await response.json()); // return response as JSON
 import { BlinkClient } from 'blink-http';
 
 const blink = new BlinkClient({
-    timeout: 10000 // is optional
+    timeout: 10000, // is optional
+    userAgent: 'custom-user-agent' // is optional
 });
 
 const response = await blink.get('https://jsonplaceholder.typicode.com/posts/1');
