@@ -1,10 +1,15 @@
 import { BlinkClient } from '../distribution/index.js';
 
-const blink = new BlinkClient(); // Create a new instance of BlinkClient
-// you can also create a new instance of BlinkClient with a base URL:
-// const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
+// Create a new instance of BlinkClient
+const blink = new BlinkClient({
+  // Optional: Set the base URL for all requests
+  // baseURL: 'https://jsonplaceholder.typicode.com',
 
-// Make a GET request to the JSONPlaceholder API
+  // Optional: Set the timeout for all requests
+  timeout: 10000,
+});
+
+// Example GET request
 const response = blink.get('https://jsonplaceholder.typicode.com/posts/1', {
   headers: {
     'Content-Type': 'application/json',

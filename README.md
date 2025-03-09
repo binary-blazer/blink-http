@@ -24,39 +24,55 @@ bun install blink-http
 
 ### Basic Usage
 
+#### with BaseURL:
 ```javascript
 import { BlinkClient } from 'blink-http';
 
-const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
+const blink = new BlinkClient({
+    baseURL: 'https://jsonplaceholder.typicode.com', // is optional
+    timeout: 10000 // is optional
+});
 
 const response = await blink.get('/posts/1');
-console.log(await response.json());
+console.log(await response.json()); // return response as JSON
+```
+
+#### without BaseURL:
+```javascript
+import { BlinkClient } from 'blink-http';
+
+const blink = new BlinkClient({
+    timeout: 10000 // is optional
+});
+
+const response = await blink.get('https://jsonplaceholder.typicode.com/posts/1');
+console.log(await response.json()); // return response as JSON
 ```
 
 ### Methods
 
-- `get(url: string, options?: RequestInit): Promise<Response>`
-- `post(url: string, body: any, options?: RequestInit): Promise<Response>`
-- `put(url: string, body: any, options?: RequestInit): Promise<Response>`
-- `delete(url: string, options?: RequestInit): Promise<Response>`
-- `patch(url: string, body: any, options?: RequestInit): Promise<Response>`
-- `head(url: string, options?: RequestInit): Promise<Response>`
-- `options(url: string, options?: RequestInit): Promise<Response>`
-- `trace(url: string, options?: RequestInit): Promise<Response>`
+- `get(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `post(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `put(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `delete(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `patch(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `head(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `options(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- `trace(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
 
 ## Examples
 
 ### GET Request
 
 ```javascript
-const response = await blink.get('/posts/1');
+const response = await blink.get('https://jsonplaceholder.typicode.com/posts/1');
 console.log(await response.json());
 ```
 
 ### POST Request
 
 ```javascript
-const response = await blink.post('/posts', { title: 'foo', body: 'bar', userId: 1 });
+const response = await blink.post('https://jsonplaceholder.typicode.com/posts', { title: 'foo', body: 'bar', userId: 1 });
 console.log(await response.json());
 ```
 

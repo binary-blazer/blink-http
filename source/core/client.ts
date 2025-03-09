@@ -9,14 +9,16 @@ class Client {
     request: Interceptor[];
     response: ResponseInterceptor[];
   };
+  timeout: number;
 
-  constructor(baseURL = "", options: RequestInit = {}) {
+  constructor(baseURL = "", options: RequestInit = {}, timeout = 0) {
     this.baseURL = baseURL;
     this.defaultOptions = options;
     this.interceptors = {
       request: [],
       response: [],
     };
+    this.timeout = timeout;
   }
 
   protected useRequestInterceptor(interceptor: Interceptor): void {
@@ -30,9 +32,18 @@ class Client {
   protected async request(
     url: string,
     options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
     let finalUrl = this.baseURL ? new URL(url, this.baseURL).toString() : url;
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
+
+    // Append query parameters to the URL
+    const urlObj = new URL(finalUrl);
+    Object.keys(queryParams).forEach((key) =>
+      urlObj.searchParams.append(key, queryParams[key]),
+    );
+    finalUrl = urlObj.toString();
 
     for (const interceptor of this.interceptors.request) {
       const modified = interceptor(finalUrl, finalOptions);
@@ -45,11 +56,16 @@ class Client {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(finalOptions.method || "GET", finalUrl, true);
+      xhr.timeout = this.timeout;
 
       if (finalOptions.headers) {
         for (const [key, value] of Object.entries(finalOptions.headers)) {
           xhr.setRequestHeader(key, value as string);
         }
+      }
+
+      if (onProgress) {
+        xhr.onprogress = onProgress;
       }
 
       xhr.onload = async () => {
@@ -98,67 +114,139 @@ class Client {
       };
 
       xhr.onerror = () => reject(new Error("Network error"));
+      xhr.ontimeout = () => reject(new Error("Request timed out"));
       xhr.send(finalOptions.body as Document | XMLHttpRequestBodyInit | null);
     });
   }
 
-  protected get(url: string, options: RequestInit = {}): Promise<Response> {
-    return this.request(url, { ...options, method: "GET" });
+  protected get(
+    url: string,
+    options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
+  ): Promise<Response> {
+    return this.request(
+      url,
+      { ...options, method: "GET" },
+      queryParams,
+      onProgress,
+    );
   }
 
   protected post(
     url: string,
     body: any,
     options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
-    return this.request(url, {
-      ...options,
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json", ...options.headers },
-    });
+    return this.request(
+      url,
+      {
+        ...options,
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json", ...options.headers },
+      },
+      queryParams,
+      onProgress,
+    );
   }
 
   protected put(
     url: string,
     body: any,
     options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
-    return this.request(url, {
-      ...options,
-      method: "PUT",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json", ...options.headers },
-    });
+    return this.request(
+      url,
+      {
+        ...options,
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json", ...options.headers },
+      },
+      queryParams,
+      onProgress,
+    );
   }
 
-  protected delete(url: string, options: RequestInit = {}): Promise<Response> {
-    return this.request(url, { ...options, method: "DELETE" });
+  protected delete(
+    url: string,
+    options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
+  ): Promise<Response> {
+    return this.request(
+      url,
+      { ...options, method: "DELETE" },
+      queryParams,
+      onProgress,
+    );
   }
 
   protected patch(
     url: string,
     body: any,
     options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
-    return this.request(url, {
-      ...options,
-      method: "PATCH",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json", ...options.headers },
-    });
+    return this.request(
+      url,
+      {
+        ...options,
+        method: "PATCH",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json", ...options.headers },
+      },
+      queryParams,
+      onProgress,
+    );
   }
 
-  protected head(url: string, options: RequestInit = {}): Promise<Response> {
-    return this.request(url, { ...options, method: "HEAD" });
+  protected head(
+    url: string,
+    options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
+  ): Promise<Response> {
+    return this.request(
+      url,
+      { ...options, method: "HEAD" },
+      queryParams,
+      onProgress,
+    );
   }
 
-  protected options(url: string, options: RequestInit = {}): Promise<Response> {
-    return this.request(url, { ...options, method: "OPTIONS" });
+  protected options(
+    url: string,
+    options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
+  ): Promise<Response> {
+    return this.request(
+      url,
+      { ...options, method: "OPTIONS" },
+      queryParams,
+      onProgress,
+    );
   }
 
-  protected trace(url: string, options: RequestInit = {}): Promise<Response> {
-    return this.request(url, { ...options, method: "TRACE" });
+  protected trace(
+    url: string,
+    options: RequestInit = {},
+    queryParams: Record<string, string> = {},
+    onProgress?: (event: ProgressEvent) => void,
+  ): Promise<Response> {
+    return this.request(
+      url,
+      { ...options, method: "TRACE" },
+      queryParams,
+      onProgress,
+    );
   }
 }
 
