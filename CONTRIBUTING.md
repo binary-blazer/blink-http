@@ -6,7 +6,7 @@ The following is a set of guidelines for contributing to Blink HTTP. These are m
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Blink HTTP Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [INSERT CONTACT METHOD].
+This project and everyone participating in it is governed by the [Blink HTTP Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [me@binaryblazer.me](mailto:me@binaryblazer.me).
 
 ## How Can I Contribute?
 
