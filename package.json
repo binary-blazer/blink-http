@@ -1,6 +1,6 @@
 {
   "name": "blink-http",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny and standalone HTTP client based on XMLHttpRequest",
   "exports": {
     ".": {
@@ -24,8 +24,7 @@
   },
   "keywords": [
     "http",
-    "https",
-    "fetch",
+    "xmlhttprequest",
     "client",
     "tiny",
     "standalone",
