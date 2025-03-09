@@ -4,6 +4,7 @@ A tiny and standalone HTTP client based on XMLHttpRequest.
 
 [![npm](https://img.shields.io/npm/v/blink-http)](https://www.npmjs.com/package/blink-http)
 [![npm](https://img.shields.io/npm/dt/blink-http)](https://www.npmjs.com/package/blink-http)
+[![CI](https://github.com/binary-blazer/blink-http/actions/workflows/ci.yml/badge.svg)](https://github.com/binary-blazer/blink-http/actions/workflows/ci.yml)
 
 ## Installation
 
