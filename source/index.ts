@@ -13,7 +13,7 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
    *
    * const response = await blink.get('/posts/1');
@@ -26,9 +26,9 @@ class BlinkClient extends Client {
    * // }
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.get('/posts/1');
    *  console.log(response);
@@ -48,9 +48,9 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.delete('/posts/1');
    * console.log(response.json());
    * // {
@@ -61,9 +61,9 @@ class BlinkClient extends Client {
    * // }
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.delete('/posts/1');
    *  console.log(response);
@@ -84,9 +84,9 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.post('/posts', { title: 'foo', body: 'bar', userId: 1 });
    * console.log(response.json());
    * // {
@@ -97,9 +97,9 @@ class BlinkClient extends Client {
    * // }
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.post('/posts', { title: 'foo', body: 'bar', userId: 1 });
    *  console.log(response);
@@ -120,9 +120,9 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.put('/posts/1', { id: 1, title: 'foo', body: 'bar', userId: 1 });
    * console.log(response.json());
    * // {
@@ -133,9 +133,9 @@ class BlinkClient extends Client {
    * // }
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.put('/posts/1', { id: 1, title: 'foo', body: 'bar', userId: 1 });
    *  console.log(response);
@@ -156,9 +156,9 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.patch('/posts/1', { title: 'foo' });
    * console.log(response.json());
    * // {
@@ -169,9 +169,9 @@ class BlinkClient extends Client {
    * // }
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.patch('/posts/1', { title: 'foo' });
    *  console.log(response);
@@ -191,16 +191,16 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.head('/posts/1');
    * console.log(response.headers);
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.head('/posts/1');
    *  console.log(response);
@@ -220,16 +220,16 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.options('/posts/1');
    * console.log(response.headers);
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.options('/posts/1');
    *  console.log(response);
@@ -249,16 +249,16 @@ class BlinkClient extends Client {
    * @throws Error if the request fails
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * const response = await blink.trace('/posts/1');
    * console.log(response.headers);
    * @example
    * import { BlinkClient } from 'blink-http';
-   * 
+   *
    * const blink = new BlinkClient('https://jsonplaceholder.typicode.com');
-   * 
+   *
    * try {
    *  const response = await blink.trace('/posts/1');
    *  console.log(response);

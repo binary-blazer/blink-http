@@ -1,5 +1,5 @@
 // @ts-expect-error: xhr2 has no types
-import { XMLHttpRequest } from 'xhr2';
+import { XMLHttpRequest } from "xhr2";
 import { Interceptor, ResponseInterceptor, BlinkResponse } from "../interfaces";
 
 class Client {
@@ -27,7 +27,10 @@ class Client {
     this.interceptors.response.push(interceptor);
   }
 
-  protected async request(url: string, options: RequestInit = {}): Promise<Response> {
+  protected async request(
+    url: string,
+    options: RequestInit = {},
+  ): Promise<Response> {
     let finalUrl = this.baseURL ? new URL(url, this.baseURL).toString() : url;
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
 
@@ -88,7 +91,11 @@ class Client {
     return this.request(url, { ...options, method: "GET" });
   }
 
-  protected post(url: string, body: any, options: RequestInit = {}): Promise<Response> {
+  protected post(
+    url: string,
+    body: any,
+    options: RequestInit = {},
+  ): Promise<Response> {
     return this.request(url, {
       ...options,
       method: "POST",
@@ -97,7 +104,11 @@ class Client {
     });
   }
 
-  protected put(url: string, body: any, options: RequestInit = {}): Promise<Response> {
+  protected put(
+    url: string,
+    body: any,
+    options: RequestInit = {},
+  ): Promise<Response> {
     return this.request(url, {
       ...options,
       method: "PUT",
@@ -110,7 +121,11 @@ class Client {
     return this.request(url, { ...options, method: "DELETE" });
   }
 
-  protected patch(url: string, body: any, options: RequestInit = {}): Promise<Response> {
+  protected patch(
+    url: string,
+    body: any,
+    options: RequestInit = {},
+  ): Promise<Response> {
     return this.request(url, {
       ...options,
       method: "PATCH",
