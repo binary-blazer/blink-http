@@ -46,7 +46,6 @@
     "type": "git",
     "url": "https://github.com/binary-blazer/blink-http.git"
   },
-  "packageManager": "pnpm@10.6.1",
   "devDependencies": {
     "@types/node": "^22.13.10",
     "prettier": "^3.5.3",
