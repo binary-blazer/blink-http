@@ -109,6 +109,27 @@ class Client {
   protected delete(url: string, options: RequestInit = {}): Promise<Response> {
     return this.request(url, { ...options, method: "DELETE" });
   }
+
+  protected patch(url: string, body: any, options: RequestInit = {}): Promise<Response> {
+    return this.request(url, {
+      ...options,
+      method: "PATCH",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json", ...options.headers },
+    });
+  }
+
+  protected head(url: string, options: RequestInit = {}): Promise<Response> {
+    return this.request(url, { ...options, method: "HEAD" });
+  }
+
+  protected options(url: string, options: RequestInit = {}): Promise<Response> {
+    return this.request(url, { ...options, method: "OPTIONS" });
+  }
+
+  protected trace(url: string, options: RequestInit = {}): Promise<Response> {
+    return this.request(url, { ...options, method: "TRACE" });
+  }
 }
 
 export default Client;
