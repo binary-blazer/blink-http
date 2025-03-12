@@ -21,8 +21,7 @@
     "prepublishOnly": "tsc",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wasm-pack": "wasm-pack build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "http",
@@ -52,5 +51,7 @@
     "prettier": "^3.5.3",
     "typescript": "^5.8.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "xhr2": "^0.2.1"
+  }
 }
