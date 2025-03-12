@@ -1,6 +1,3 @@
-// @ts-expect-error: xhr2 has no types
-import { XMLHttpRequest } from "xhr2";
-
 import { Interceptor, ResponseInterceptor, BlinkResponse } from "../interfaces";
 import {
   BLINK_USER_AGENT,
@@ -8,6 +5,7 @@ import {
   DEFAULT_OPTIONS,
 } from "../constants.js";
 import { buildFinalUrl, applyInterceptors, createResponse } from "./utils.js";
+import wasm from "../pkg";
 
 class Client {
   baseURL: string;
@@ -55,42 +53,21 @@ class Client {
     applyInterceptors(this.interceptors.request, finalUrl, finalOptions);
 
     return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open(finalOptions.method || "GET", finalUrl, true);
-      xhr.timeout = this.timeout;
+      wasm
+        .http_request(finalOptions.method || "GET", finalUrl, finalOptions)
+        .then((response: BlinkResponse) => {
+          for (const interceptor of this.interceptors.response) {
+            const modifiedResponse = interceptor(response);
+            if (modifiedResponse) return resolve(modifiedResponse);
+          }
 
-      if (finalOptions.headers) {
-        for (const [key, value] of Object.entries(finalOptions.headers)) {
-          xhr.setRequestHeader(key, value as string);
-        }
-      }
-
-      xhr.setRequestHeader("User-Agent", this.userAgent);
-
-      if (onProgress) {
-        xhr.onprogress = onProgress;
-      }
-
-      xhr.onload = async () => {
-        let response: BlinkResponse = createResponse(
-          xhr,
-          finalUrl,
-          this.userAgent,
-        );
-
-        for (const interceptor of this.interceptors.response) {
-          const modifiedResponse = await interceptor(response);
-          if (modifiedResponse) return resolve(modifiedResponse);
-        }
-
-        if (!response.ok)
-          return reject(new Error(`HTTP error! Status: ${response.status}`));
-        resolve(response);
-      };
-
-      xhr.onerror = () => reject(new Error("Network error"));
-      xhr.ontimeout = () => reject(new Error("Request timed out"));
-      xhr.send(finalOptions.body as Document | XMLHttpRequestBodyInit | null);
+          if (!response.ok)
+            return reject(new Error(`HTTP error! Status: ${response.status}`));
+          resolve(response);
+        })
+        .catch((error: Error) => {
+          reject(error);
+        });
     });
   }
 
