@@ -1,6 +1,6 @@
 {
   "name": "blink-http",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A tiny and standalone HTTP client based on XMLHttpRequest",
   "main": "./distribution/index.js",
   "exports": {
@@ -16,13 +16,15 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build:package": "tsc",
+    "build:core": "cd core && cargo build --release",
+    "build:core:debug": "cd core && cargo build",
+    "build": "npm run build:package && npm run build:core",
     "watch": "tsc -w",
     "prepublishOnly": "tsc",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wasm-pack": "wasm-pack build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "http",
@@ -51,6 +53,5 @@
     "@types/node": "^22.13.10",
     "prettier": "^3.5.3",
     "typescript": "^5.8.2"
-  },
-  "dependencies": {}
+  }
 }

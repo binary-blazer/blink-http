@@ -4,7 +4,9 @@ import {
   DEFAULT_TIMEOUT,
   DEFAULT_OPTIONS,
 } from "../constants.js";
-import { buildFinalUrl, applyInterceptors, createResponse } from "./utils.js";
+import { buildFinalUrl, applyInterceptors } from "../utils";
+
+// @ts-expect-error: WebAssembly module, no types available
 import wasm from "../pkg";
 
 class Client {

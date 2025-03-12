@@ -1,4 +1,4 @@
-import Client from "./core/client.js";
+import Client from "./client/index.js";
 import { BlinkClientOptions } from "./interfaces";
 import {
   BLINK_USER_AGENT,

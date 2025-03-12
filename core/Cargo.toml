@@ -1,0 +1,8 @@
+[package]
+name = "blink-http-core"
+version = "1.2.0"
+authors = ["Jonas F. Franke <me@binaryblazer.me>"]
+edition = "2022"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
