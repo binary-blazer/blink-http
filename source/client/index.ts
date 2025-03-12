@@ -7,7 +7,7 @@ import {
 import { buildFinalUrl, applyInterceptors } from "../utils";
 
 // @ts-ignore: WebAssembly module
-import init, { http_request } from "../core/core.js";
+import { http_request } from "../core/core.js";
 
 class Client {
   baseURL: string;
@@ -18,7 +18,6 @@ class Client {
   };
   timeout: number;
   userAgent: string;
-  wasmInitialized: boolean;
 
   constructor(
     baseURL = "",
@@ -34,14 +33,6 @@ class Client {
     };
     this.timeout = timeout;
     this.userAgent = userAgent;
-    this.wasmInitialized = false;
-  }
-
-  async init() {
-    if (!this.wasmInitialized) {
-      await init();
-      this.wasmInitialized = true;
-    }
   }
 
   protected useRequestInterceptor(interceptor: Interceptor): void {
@@ -58,15 +49,18 @@ class Client {
     queryParams: Record<string, string> = {},
     onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
-    await this.init(); // Ensure the Wasm module is initialized
-
     let finalUrl = buildFinalUrl(this.baseURL, url, queryParams);
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
 
     applyInterceptors(this.interceptors.request, finalUrl, finalOptions);
 
     return new Promise((resolve, reject) => {
-      http_request(finalOptions.method || "GET", finalUrl, finalOptions)
+      http_request(
+        finalOptions.method || "GET",
+        finalUrl,
+        finalOptions,
+        this.userAgent,
+      )
         .then((response: BlinkResponse) => {
           for (const interceptor of this.interceptors.response) {
             const modifiedResponse = interceptor(response);

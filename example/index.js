@@ -26,6 +26,9 @@ const response = blink.get('https://jsonplaceholder.typicode.com/posts/1', {
 
 // Log the response data
 response.then(async (data) => {
-  console.log("Raw Response Data:", data);
-  console.log("\nResponse Data:", await data.json());
+  // console.log("Raw Response Data:", data);
+  // console.log("\nResponse Data:", await data.json());
+
+  const json = await data.json();
+  console.log(json);
 });

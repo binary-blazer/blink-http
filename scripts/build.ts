@@ -34,7 +34,7 @@ const spinnerCopy = ora("Copying core output to distribution...");
 
     try {
         spinnerCore.start("Compiling Rust core...");
-        await $`wasm-pack build --target web 2>NUL`.cwd(coreDir);
+        await $`wasm-pack build --target nodejs 2>NUL`.cwd(coreDir);
         spinnerCore.succeed("Rust core compiled successfully.");
     } catch (error: any) {
         spinnerCore.fail("Error compiling Rust core.");
