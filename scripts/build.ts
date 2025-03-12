@@ -15,8 +15,8 @@ console.log("Root directory:", rootDir);
 console.log("-".repeat(sepLength));
 
 const distDir = path.resolve(rootDir, "distribution");
-const coreDir = path.resolve(rootDir, "core");
-const compiledCoreDir = path.resolve(rootDir, "core", "pkg");
+const coreDir = path.resolve(rootDir, "source", "core");
+const compiledCoreDir = path.resolve(rootDir, "source", "core", "pkg");
 
 const spinnerTs = ora("Compiling TypeScript...");
 const spinnerCore = ora("Compiling Rust core...");
