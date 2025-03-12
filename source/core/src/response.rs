@@ -66,20 +66,41 @@ pub fn create_response_object(
     )?;
 
     let json_body = body.clone();
+
     let json_fn = Closure::wrap(Box::new(move || {
         let body_clone = json_body.clone();
-        let promise = Promise::new(&mut |resolve, reject| {
-            match serde_json::from_str::<serde_json::Value>(&body_clone) {
-                Ok(json) => resolve
-                    .call1(&JsValue::NULL, &to_value(&json).unwrap())
-                    .unwrap(),
-                Err(err) => reject
+        let promise = Promise::new(&mut |resolve, reject| match serde_json::from_str::<
+            serde_json::Value,
+        >(&body_clone)
+        {
+            Ok(parsed_json) => {
+                if let serde_json::Value::Object(obj) = parsed_json {
+                    let js_obj = Object::new();
+                    for (key, value) in obj {
+                        let js_key = JsValue::from_str(&key);
+                        let js_value = to_value(&value).unwrap();
+                        Reflect::set(&js_obj, &js_key, &js_value).unwrap();
+                    }
+
+                    resolve.call1(&JsValue::NULL, &js_obj).unwrap();
+                } else {
+                    reject
+                        .call1(
+                            &JsValue::NULL,
+                            &JsValue::from_str("Parsed JSON is not an object"),
+                        )
+                        .unwrap();
+                }
+            }
+            Err(err) => {
+                reject
                     .call1(&JsValue::NULL, &JsValue::from_str(&err.to_string()))
-                    .unwrap(),
-            };
+                    .unwrap();
+            }
         });
         promise
     }) as Box<dyn FnMut() -> Promise>);
+
     Reflect::set(
         &response_obj,
         &JsValue::from_str("json"),

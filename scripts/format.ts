@@ -13,7 +13,7 @@ console.log("Formatting...");
 console.log("Root directory:", rootDir);
 console.log("-".repeat(sepLength));
 
-const coreDir = path.resolve(rootDir, "core");
+const coreDir = path.resolve(rootDir, "source", "core");
 
 const spinnerTs = ora("Formatting TypeScript...");
 const spinnerCore = ora("Formatting Rust core...");
