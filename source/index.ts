@@ -45,7 +45,7 @@ class BlinkClient extends Client {
    */
   public get(
     url: string,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -80,7 +80,7 @@ class BlinkClient extends Client {
    */
   public delete(
     url: string,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -116,7 +116,7 @@ class BlinkClient extends Client {
   public post(
     url: string,
     body: any,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -152,7 +152,7 @@ class BlinkClient extends Client {
   public put(
     url: string,
     body: any,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -188,7 +188,7 @@ class BlinkClient extends Client {
   public patch(
     url: string,
     body: any,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -217,7 +217,7 @@ class BlinkClient extends Client {
    */
   public head(
     url: string,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -246,7 +246,7 @@ class BlinkClient extends Client {
    */
   public options(
     url: string,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {
@@ -275,7 +275,7 @@ class BlinkClient extends Client {
    */
   public trace(
     url: string,
-    options: RequestInit = DEFAULT_OPTIONS,
+    options: Omit<RequestInit, "body" | "method"> = DEFAULT_OPTIONS,
     queryParams: Record<string, string> = DEFAULT_QUERY_PARAMS,
     onProgress?: (event: ProgressEvent) => void,
   ) {

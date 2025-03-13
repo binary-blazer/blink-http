@@ -8,7 +8,7 @@ A tiny, elegant and standalone HTTP client.
 
 ## Installation
 
-You can install the package using npm or pnpm:
+You can install the package using npm, pnpm, yarn or bun.
 
 ```sh
 npm install blink-http
@@ -51,16 +51,47 @@ const response = await blink.get('https://jsonplaceholder.typicode.com/posts/1')
 console.log(await response.json()); // return response as JSON
 ```
 
-### Methods
+## Methods
 
-- `get(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `post(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `put(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `delete(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `patch(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `head(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `options(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
-- `trace(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>`
+- **`get`**
+  ```typescript
+  get(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`post`**
+  ```typescript
+  post(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`put`**
+  ```typescript
+  put(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`delete`**
+  ```typescript
+  delete(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`patch`**
+  ```typescript
+  patch(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`head`**
+  ```typescript
+  head(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`options`**
+  ```typescript
+  options(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
+
+- **`trace`**
+  ```typescript
+  trace(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  ```
 
 ## Examples
 
@@ -68,14 +99,14 @@ console.log(await response.json()); // return response as JSON
 
 ```javascript
 const response = await blink.get('https://jsonplaceholder.typicode.com/posts/1');
-console.log(await response.json());
+console.log(response.json());
 ```
 
 ### POST Request
 
 ```javascript
 const response = await blink.post('https://jsonplaceholder.typicode.com/posts', { title: 'foo', body: 'bar', userId: 1 });
-console.log(await response.json());
+console.log(response.json());
 ```
 
 ## Contributing
