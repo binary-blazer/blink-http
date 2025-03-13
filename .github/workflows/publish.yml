@@ -37,20 +37,7 @@ jobs:
       - run: npm install -g bun
       - run: bun install
       - run: bun run build
-      - name: Determine the branch
-        id: branch
-        run: echo ::set-output name=branch::${GITHUB_REF#refs/heads/}
-      - name: Set npm tag
-        id: npm_tag
-        run: |
-          if [ "${{ steps.branch.outputs.branch }}" == "main" ]; then
-            echo ::set-output name=tag::latest
-          elif [ "${{ steps.branch.outputs.branch }}" == "canary" ]; then
-            echo ::set-output name=tag::canary
-          else
-            echo ::set-output name=tag::${{ steps.branch.outputs.branch }}
-          fi
       - name: Publish to npm
-        run: npm publish --provenance --access public --tag ${{ steps.npm_tag.outputs.tag }}
+        run: npm publish --provenance --access public --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
