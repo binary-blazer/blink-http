@@ -10,14 +10,14 @@ import { buildFinalUrl, applyInterceptors } from "../utils";
 import { http_request } from "../core/core.js";
 
 class Client {
-  baseURL: string;
-  defaultOptions: RequestInit;
-  interceptors: {
+  protected baseURL: string;
+  protected defaultOptions: RequestInit;
+  protected interceptors: {
     request: Interceptor[];
     response: ResponseInterceptor[];
   };
-  timeout: number;
-  userAgent: string;
+  protected timeout: number;
+  protected userAgent: string;
 
   constructor(
     baseURL = "",
