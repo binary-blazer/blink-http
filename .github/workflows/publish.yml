@@ -49,6 +49,7 @@ jobs:
             echo ::set-output name=tag::canary
           else
             echo ::set-output name=tag::${{ steps.branch.outputs.branch }}
+          fi
       - name: Publish to npm
         run: npm publish --provenance --access public --tag ${{ steps.npm_tag.outputs.tag }}
         env:
