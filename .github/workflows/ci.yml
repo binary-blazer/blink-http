@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - canary
   pull_request:
     branches:
       - main
+      - canary
 
 jobs:
   build:
@@ -21,6 +23,13 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: Install Rust and Cargo
+        run: |
+          sudo apt update
+          sudo apt install -y curl
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          source $HOME/.cargo/env
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2.0.1
         with:
@@ -33,4 +42,4 @@ jobs:
         run: bun run build
 
       - name: Run format check
-        run: bun format:check
+        run: bun prettier . --check

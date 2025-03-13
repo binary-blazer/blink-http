@@ -7,17 +7,20 @@ import {
   DEFAULT_TIMEOUT,
   DEFAULT_OPTIONS,
 } from "../constants.js";
-import { buildFinalUrl, applyInterceptors, createResponse } from "./utils.js";
+import { buildFinalUrl, applyInterceptors } from "../utils";
+
+// @ts-ignore: WebAssembly module
+import { http_request } from "../core/core.js";
 
 class Client {
-  baseURL: string;
-  defaultOptions: RequestInit;
-  interceptors: {
+  protected baseURL: string;
+  protected defaultOptions: RequestInit;
+  protected interceptors: {
     request: Interceptor[];
     response: ResponseInterceptor[];
   };
-  timeout: number;
-  userAgent: string;
+  protected timeout: number;
+  protected userAgent: string;
 
   constructor(
     baseURL = "",
@@ -47,7 +50,7 @@ class Client {
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
-    onProgress?: (event: ProgressEvent) => void,
+    _onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
     let finalUrl = buildFinalUrl(this.baseURL, url, queryParams);
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
@@ -55,46 +58,25 @@ class Client {
     applyInterceptors(this.interceptors.request, finalUrl, finalOptions);
 
     return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open(finalOptions.method || "GET", finalUrl, true);
-      xhr.timeout = this.timeout;
-
-      if (finalOptions.headers) {
-        for (const [key, value] of Object.entries(finalOptions.headers)) {
-          xhr.setRequestHeader(key, value as string);
-        }
-      }
-
-      xhr.setRequestHeader("User-Agent", this.userAgent);
-
-      if (onProgress) {
-        xhr.onprogress = onProgress;
-      }
-
-      xhr.onload = async () => {
-        let response: BlinkResponse = createResponse(
-          xhr,
-          finalUrl,
-          this.userAgent,
-        );
-
+      http_request(
+        finalOptions.method || "GET",
+        finalUrl,
+        finalOptions,
+        this.userAgent,
+      ).then((response: BlinkResponse) => {
         for (const interceptor of this.interceptors.response) {
-          const modifiedResponse = await interceptor(response);
+          const modifiedResponse = interceptor(response);
           if (modifiedResponse) return resolve(modifiedResponse);
         }
 
         if (!response.ok)
           return reject(new Error(`HTTP error! Status: ${response.status}`));
         resolve(response);
-      };
-
-      xhr.onerror = () => reject(new Error("Network error"));
-      xhr.ontimeout = () => reject(new Error("Request timed out"));
-      xhr.send(finalOptions.body as Document | XMLHttpRequestBodyInit | null);
+      });
     });
   }
 
-  protected get(
+  public get(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -108,7 +90,7 @@ class Client {
     );
   }
 
-  protected post(
+  public post(
     url: string,
     body: any,
     options: RequestInit = {},
@@ -128,7 +110,7 @@ class Client {
     );
   }
 
-  protected put(
+  public put(
     url: string,
     body: any,
     options: RequestInit = {},
@@ -148,7 +130,7 @@ class Client {
     );
   }
 
-  protected delete(
+  public delete(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -162,7 +144,7 @@ class Client {
     );
   }
 
-  protected patch(
+  public patch(
     url: string,
     body: any,
     options: RequestInit = {},
@@ -182,7 +164,7 @@ class Client {
     );
   }
 
-  protected head(
+  public head(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -196,7 +178,7 @@ class Client {
     );
   }
 
-  protected options(
+  public options(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -210,7 +192,7 @@ class Client {
     );
   }
 
-  protected trace(
+  public trace(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},

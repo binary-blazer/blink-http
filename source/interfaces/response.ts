@@ -7,7 +7,6 @@ export interface BlinkResponse extends Response {
   headers: Headers;
   redirected: boolean;
   statusText: string;
-  type: ResponseType;
   url: string;
   body: ReadableStream<Uint8Array> | null;
   bodyUsed: boolean;

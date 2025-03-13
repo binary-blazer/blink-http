@@ -1,7 +1,7 @@
 {
   "name": "blink-http",
-  "version": "1.1.1",
-  "description": "A tiny and standalone HTTP client based on XMLHttpRequest",
+  "version": "1.2.0-canary.2",
+  "description": "A tiny, elegant and standalone HTTP client",
   "main": "./distribution/index.js",
   "exports": {
     ".": {
@@ -10,22 +10,30 @@
     }
   },
   "types": "./distribution/index.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "files": [
     "distribution",
     "LICENSE",
     "README.md"
   ],
+  "maintainers": [
+    "Jonas F. Franke <me@binaryblazer.me"
+  ],
+  "contributors": [
+    "Jonas F. Franke <me@binaryblazer.me"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "bun scripts/build.ts",
+    "format": "bun scripts/format.ts",
     "watch": "tsc -w",
     "prepublishOnly": "tsc",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "http",
-    "xmlhttprequest",
     "client",
     "tiny",
     "standalone",
@@ -47,11 +55,11 @@
     "url": "https://github.com/binary-blazer/blink-http.git"
   },
   "devDependencies": {
+    "@types/bun": "^1.2.5",
     "@types/node": "^22.13.10",
+    "ora": "^8.2.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
-  },
-  "dependencies": {
-    "xhr2": "^0.2.1"
+    "typescript": "^5.8.2",
+    "wasm-pack": "^0.13.1"
   }
 }

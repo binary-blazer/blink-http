@@ -1,32 +1,5 @@
 import { BlinkResponse } from "../interfaces";
 
-export function buildFinalUrl(
-  baseURL: string,
-  url: string,
-  queryParams: Record<string, string>,
-): string {
-  let finalUrl = baseURL ? new URL(url, baseURL).toString() : url;
-  const urlObj = new URL(finalUrl);
-  Object.keys(queryParams).forEach((key) =>
-    urlObj.searchParams.append(key, queryParams[key]),
-  );
-  return urlObj.toString();
-}
-
-export function applyInterceptors(
-  interceptors: any[],
-  finalUrl: string,
-  finalOptions: RequestInit,
-): void {
-  for (const interceptor of interceptors) {
-    const modified = interceptor(finalUrl, finalOptions);
-    if (modified) {
-      finalUrl = modified.url || finalUrl;
-      finalOptions = modified.options || finalOptions;
-    }
-  }
-}
-
 export function createResponse(
   xhr: XMLHttpRequest,
   finalUrl: string,
