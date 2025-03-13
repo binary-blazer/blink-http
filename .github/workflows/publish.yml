@@ -34,8 +34,6 @@ jobs:
           sudo apt install -y curl
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           source $HOME/.cargo/env
-      - name: Install wasm-pack
-        run: cargo install wasm-pack
       - run: npm install -g bun
       - run: bun install
       - run: bun run build
