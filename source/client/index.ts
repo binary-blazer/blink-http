@@ -63,21 +63,16 @@ class Client {
         finalUrl,
         finalOptions,
         this.userAgent,
-      )
-        .then((response: BlinkResponse) => {
-          for (const interceptor of this.interceptors.response) {
-            const modifiedResponse = interceptor(response);
-            if (modifiedResponse) return resolve(modifiedResponse);
-          }
+      ).then((response: BlinkResponse) => {
+        for (const interceptor of this.interceptors.response) {
+          const modifiedResponse = interceptor(response);
+          if (modifiedResponse) return resolve(modifiedResponse);
+        }
 
         if (!response.ok)
           return reject(new Error(`HTTP error! Status: ${response.status}`));
         resolve(response);
-      };
-
-      xhr.onerror = () => reject(new Error("Network error"));
-      xhr.ontimeout = () => reject(new Error("Request timed out"));
-      xhr.send(finalOptions.body as Document | XMLHttpRequestBodyInit | null);
+      });
     });
   }
 

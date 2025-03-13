@@ -37,6 +37,12 @@ jobs:
       - run: npm install -g bun
       - run: bun install
       - run: bun run build
-      - run: npm publish --tag canary --provenance --access public
+      - name: Publish to npm
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            npm publish --tag latest --provenance --access public
+          elif [ "${{ github.ref }}" == "refs/heads/canary" ]; then
+            npm publish --tag canary --provenance --access public
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
