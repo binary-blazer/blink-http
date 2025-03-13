@@ -18,6 +18,12 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a GET request.
+   * @param {string} url - The URL to send the request to.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -53,6 +59,12 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a DELETE request.
+   * @param {string} url - The URL to send the request to.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -88,6 +100,13 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a POST request.
+   * @param {string} url - The URL to send the request to.
+   * @param {any} body - The body of the request.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -124,6 +143,13 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a PUT request.
+   * @param {string} url - The URL to send the request to.
+   * @param {any} body - The body of the request.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -160,6 +186,13 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a PATCH request.
+   * @param {string} url - The URL to send the request to.
+   * @param {any} body - The body of the request.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -196,6 +229,12 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a HEAD request.
+   * @param {string} url - The URL to send the request to.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -225,6 +264,12 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends an OPTIONS request.
+   * @param {string} url - The URL to send the request to.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
@@ -254,6 +299,12 @@ class BlinkClient extends Client {
   }
 
   /**
+   * Sends a TRACE request.
+   * @param {string} url - The URL to send the request to.
+   * @param {Omit<RequestInit, "body" | "method">} [options=DEFAULT_OPTIONS] - The options for the request.
+   * @param {Record<string, string>} [queryParams=DEFAULT_QUERY_PARAMS] - The query parameters to append to the URL.
+   * @param {(event: ProgressEvent) => void} [onProgress] - The progress event handler.
+   * @returns {Promise<Response>} The response from the server.
    * @example
    * import { BlinkClient } from 'blink-http';
    *
