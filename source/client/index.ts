@@ -47,7 +47,7 @@ class Client {
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
-    onProgress?: (event: ProgressEvent) => void,
+    _onProgress?: (event: ProgressEvent) => void,
   ): Promise<Response> {
     let finalUrl = buildFinalUrl(this.baseURL, url, queryParams);
     let finalOptions: RequestInit = { ...this.defaultOptions, ...options };
