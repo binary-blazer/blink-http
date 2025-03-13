@@ -77,7 +77,7 @@ class Client {
     });
   }
 
-  protected get(
+  public get(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -91,7 +91,7 @@ class Client {
     );
   }
 
-  protected post(
+  public post(
     url: string,
     body: any,
     options: RequestInit = {},
@@ -111,7 +111,7 @@ class Client {
     );
   }
 
-  protected put(
+  public put(
     url: string,
     body: any,
     options: RequestInit = {},
@@ -131,7 +131,7 @@ class Client {
     );
   }
 
-  protected delete(
+  public delete(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -145,7 +145,7 @@ class Client {
     );
   }
 
-  protected patch(
+  public patch(
     url: string,
     body: any,
     options: RequestInit = {},
@@ -165,7 +165,7 @@ class Client {
     );
   }
 
-  protected head(
+  public head(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -179,7 +179,7 @@ class Client {
     );
   }
 
-  protected options(
+  public options(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
@@ -193,7 +193,7 @@ class Client {
     );
   }
 
-  protected trace(
+  public trace(
     url: string,
     options: RequestInit = {},
     queryParams: Record<string, string> = {},
