@@ -1,3 +1,6 @@
+// @ts-expect-error: xhr2 has no types
+import { XMLHttpRequest } from "xhr2";
+
 import { Interceptor, ResponseInterceptor, BlinkResponse } from "../interfaces";
 import {
   BLINK_USER_AGENT,
@@ -67,13 +70,14 @@ class Client {
             if (modifiedResponse) return resolve(modifiedResponse);
           }
 
-          if (!response.ok)
-            return reject(new Error(`HTTP error! Status: ${response.status}`));
-          resolve(response);
-        })
-        .catch((error: Error) => {
-          reject(error);
-        });
+        if (!response.ok)
+          return reject(new Error(`HTTP error! Status: ${response.status}`));
+        resolve(response);
+      };
+
+      xhr.onerror = () => reject(new Error("Network error"));
+      xhr.ontimeout = () => reject(new Error("Request timed out"));
+      xhr.send(finalOptions.body as Document | XMLHttpRequestBodyInit | null);
     });
   }
 
