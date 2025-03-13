@@ -1,6 +1,6 @@
 # Blink HTTP
 
-A tiny, elegant and standalone HTTP client.
+A fast, elegant and standalone HTTP client.
 
 [![npm](https://img.shields.io/npm/v/blink-http)](https://www.npmjs.com/package/blink-http)
 [![npm](https://img.shields.io/npm/dt/blink-http)](https://www.npmjs.com/package/blink-http)

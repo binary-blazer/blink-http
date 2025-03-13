@@ -1,7 +1,7 @@
 {
   "name": "blink-http",
-  "version": "1.2.0",
-  "description": "A tiny, elegant and standalone HTTP client",
+  "version": "1.2.1",
+  "description": "A fast, elegant and standalone HTTP client",
   "main": "./distribution/index.js",
   "exports": {
     ".": {
@@ -35,7 +35,7 @@
   "keywords": [
     "http",
     "client",
-    "tiny",
+    "fast",
     "standalone",
     "blink",
     "blink-http"
