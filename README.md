@@ -55,42 +55,42 @@ console.log(await response.json()); // return response as JSON
 
 - **`get`**
   ```typescript
-  get(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  get(url: string, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`post`**
   ```typescript
-  post(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  post(url: string, body: any, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`put`**
   ```typescript
-  put(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  put(url: string, body: any, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`delete`**
   ```typescript
-  delete(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  delete(url: string, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`patch`**
   ```typescript
-  patch(url: string, body: any, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  patch(url: string, body: any, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`head`**
   ```typescript
-  head(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  head(url: string, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`options`**
   ```typescript
-  options(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  options(url: string, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 - **`trace`**
   ```typescript
-  trace(url: string, options?: RequestInit, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
+  trace(url: string, options?: Omit<RequestInit, "body" | "method">, queryParams?: Record<string, string>, onProgress?: (event: ProgressEvent) => void): Promise<Response>
   ```
 
 ## Examples
