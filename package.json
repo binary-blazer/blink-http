@@ -1,7 +1,7 @@
 {
   "name": "blink-http",
   "version": "1.3.0-canary.1",
-  "description": "A tiny, elegant and standalone HTTP client",
+  "description": "A fast, elegant and standalone HTTP client",
   "main": "./distribution/index.js",
   "exports": {
     ".": {
@@ -35,7 +35,7 @@
   "keywords": [
     "http",
     "client",
-    "tiny",
+    "fast",
     "standalone",
     "blink",
     "blink-http"
